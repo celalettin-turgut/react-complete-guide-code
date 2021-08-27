@@ -1,0 +1,32 @@
+.cardContainer {
+    margin: 0 auto;
+    background-color:greenyellow;
+    margin-bottom: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-style:initial;
+    position: relative;
+}
+
+.deleteGoal {
+width: 10%;
+position: absolute;
+right: 1rem;
+text-align: center;
+font-size: 30px;
+}
+
+.deleteGoal:hover {
+    cursor:pointer;
+}
+
+.goalCheckBox {
+    position: absolute;
+    right: 4rem;
+}
+
+.goalCompleted {
+    font-style: italic;
+    background-color: red;
+}
