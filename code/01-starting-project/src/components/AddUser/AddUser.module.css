@@ -1,0 +1,23 @@
+.addUserContainer {
+    margin: 1rem auto 2rem;
+    padding: 1rem;
+    width: 20rem;
+    height: 7rem;
+    background-color: #f55733c0;
+    border-radius: 10px;
+}
+
+.formInputContainer {
+    margin-bottom: 7px;
+}
+
+.formInputContainer input {
+    border: blueviolet 1px solid;
+    padding: 3px 4px;
+}
+
+.formInputContainer button {
+    width: 20%;
+    padding:5px 10px;
+    
+}

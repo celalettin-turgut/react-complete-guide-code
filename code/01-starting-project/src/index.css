@@ -3,9 +3,10 @@
 }
 
 html {
-  font-family: sans-serif;
+  font-family:Georgia, 'Times New Roman', Times, serif
 }
 
 body {
   margin: 0;
+  background-color: azure;
 }
