@@ -1,41 +1,59 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./AddUser.module.css";
 import Button from "../UI/Button";
+import ErrorModal from "../UI/ErrorModal";
 
 const AddUser = ({ setUsers }) => {
-  const [values, setValues] = useState({ name: "", age: "" });
+  const [error, setError] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const nameRef = useRef();
+  const ageRef = useRef();
 
   const addUserHandler = (e) => {
     e.preventDefault();
-    if (!values.name || !values.age) return;
-    setUsers((prevUsers) => [...prevUsers, values]);
-    setValues({ name: "", age: "" });
+    let error = [];
+    if (!nameRef.current.value) {
+      error.push("Please provide a name!");
+    }
+    if (!ageRef.current.value) {
+      error.push("Please provide an age!");
+    } else {
+      if (+ageRef.current.value < 0) {
+        error.push("Please provide a valid age!");
+      }
+    }
+
+    if (error?.length > 0) {
+      setModalOpen(true);
+      setError(error);
+    } else {
+      setUsers((prevUsers) => [
+        ...prevUsers,
+        { name: nameRef.current?.value, age: ageRef.current?.value },
+      ]);
+    }
   };
 
-  const handleChange = (event, prop) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleErrorOkay = () => {
+    setModalOpen(false);
   };
 
   return (
     <div className={styles.addUserContainer}>
+      {modalOpen && (
+        <ErrorModal
+          handleErrorOkay={handleErrorOkay}
+          error={error}
+        ></ErrorModal>
+      )}
       <form onSubmit={addUserHandler}>
         <div className={styles.formInputContainer}>
           <label htmlFor="name">Name:</label>
-          <input
-            onChange={(e) => handleChange(e, "name")}
-            type="text"
-            id="name"
-            value={values.name}
-          />
+          <input type="text" id="name" ref={nameRef} />
         </div>
         <div className={styles.formInputContainer}>
           <label htmlFor="age">Age:</label>
-          <input
-            onChange={(e) => handleChange(e, "age")}
-            type="number"
-            id="age"
-            value={values.age}
-          />
+          <input type="number" id="age" ref={ageRef} />
         </div>
         <div className={styles.formInputContainer}>
           <Button className={styles.myButton} type="submit">
