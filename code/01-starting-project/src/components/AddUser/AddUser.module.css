@@ -16,8 +16,8 @@
     padding: 3px 4px;
 }
 
-.formInputContainer button {
-    width: 20%;
-    padding:5px 10px;
-    
+.formInputContainer label {
+    display: inline-block;
+    width: 40%;
 }
+
