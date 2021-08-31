@@ -10,6 +10,9 @@ const AddUser = ({ setUsers }) => {
   const ageRef = useRef();
 
   const addUserHandler = (e) => {
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+    console.log(typeof name, typeof age);
     e.preventDefault();
     let error = [];
     if (!nameRef.current.value) {
@@ -27,10 +30,7 @@ const AddUser = ({ setUsers }) => {
       setModalOpen(true);
       setError(error);
     } else {
-      setUsers((prevUsers) => [
-        ...prevUsers,
-        { name: nameRef.current?.value, age: ageRef.current?.value },
-      ]);
+      setUsers((prevUsers) => [...prevUsers, { name, age }]);
     }
   };
 
