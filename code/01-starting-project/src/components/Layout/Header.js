@@ -4,7 +4,6 @@ import mealsImg from "../../assets/meals.jpg";
 import HeaderCartButton from "./HeaderCartButton";
 
 const Header = () => {
-  console.log(styles);
   return (
     <div>
       <header className={styles.header}>
