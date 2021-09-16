@@ -2,6 +2,7 @@ import Card from "../UI/Card";
 import styles from "./AvailableMeals.module.css";
 import MealItem from "./MealItem";
 
+
 const DUMMY_MEALS = [
   {
     id: "m1",
@@ -34,6 +35,7 @@ const AvailableMeals = () => {
     return (
       <MealItem
         key={meal.name}
+        meal={meal}
         name={meal.name}
         description={meal.description}
         price={meal.price}

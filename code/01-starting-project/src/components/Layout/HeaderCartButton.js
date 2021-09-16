@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./HeaderCartButton.module.css";
 import CartIcon from "../Cart/CartIcon";
+import { BasketContext } from "../../_store/basket";
 
-const HeaderCartButton = () => {
+const HeaderCartButton = ({ setVisible }) => {
+  const { cartContext } = useContext(BasketContext);
+  const numberOfCartItems = cartContext.basket.length;
+  console.log("amount", numberOfCartItems);
   return (
-    <button className={styles.button}>
+    <button onClick={() => setVisible(true)} className={styles.button}>
       <span className={styles.icon}>
         <CartIcon />
       </span>
       <span>Cart</span>
-      <span className={styles.badge}>3</span>
+      <span className={styles.badge}>{numberOfCartItems}</span>
     </button>
   );
 };
