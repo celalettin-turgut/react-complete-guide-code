@@ -1,31 +1,41 @@
-import React from 'react';
+import React, { useState } from "react";
 
-import MoviesList from './components/MoviesList';
-import './App.css';
+import MoviesList from "./components/MoviesList";
+import "./App.css";
 
 function App() {
-  const dummyMovies = [
-    {
-      id: 1,
-      title: 'Some Dummy Movie',
-      openingText: 'This is the opening text of the movie',
-      releaseDate: '2021-05-18',
-    },
-    {
-      id: 2,
-      title: 'Some Dummy Movie 2',
-      openingText: 'This is the second opening text of the movie',
-      releaseDate: '2021-05-19',
-    },
-  ];
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const GET_MOVIES = "https://swapi.dev/api/film/";
+
+  const fetchMovie = async () => {
+    try {
+      const response = await fetch(GET_MOVIES);
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const data = await response.json();
+      const transformedData = data.results.map((film) => {
+        return {
+          title: film.title,
+          date: film.release_date,
+          description: film.opening_crawl,
+        };
+      });
+      setMovies(transformedData);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <React.Fragment>
       <section>
-        <button>Fetch Movies</button>
+        <button onClick={fetchMovie}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={dummyMovies} />
+        {!error && <MoviesList movies={movies} />}
+        {error && <p>{error}</p>}
       </section>
     </React.Fragment>
   );
