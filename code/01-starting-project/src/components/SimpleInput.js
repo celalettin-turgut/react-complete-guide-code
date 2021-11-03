@@ -16,7 +16,7 @@ const SimpleInput = (props) => {
         <input type='text' id='email' />
       </div>
       <div className='form-actions'>
-        <button>Submit</button>
+        <button type='submit'>Submit</button>
       </div>
     </form>
   );
